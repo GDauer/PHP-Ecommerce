@@ -42,10 +42,8 @@ class Model {
 
     }
 
-    /**
-     * @return array
-     */
-    public function getValues(): array
+
+    public function getValues()
     {
 
         return $this->values;
