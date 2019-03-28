@@ -15,5 +15,8 @@
         "psr-4": {
             "Hcode\\": "vendor\\hcodebr\\php-classes\\src"
         }
+    },
+    "require-dev": {
+        "ext-openssl": "*"
     }
 }
