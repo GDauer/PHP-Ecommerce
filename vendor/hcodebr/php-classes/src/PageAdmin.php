@@ -1,7 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gustavo
- * Date: 27/03/19
- * Time: 10:02
- */
+
+namespace Hcode;
+
+class PageAdmin extends Page {
+
+
+    public function __construct($opts = array(), $tpl_dir = '/views/admin/')
+    {
+        parent::__construct($opts, $tpl_dir);
+    }
+
+
+}
+
+?>
