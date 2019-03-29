@@ -6,7 +6,7 @@ use Rain\Tpl;
 class Mailer {
 
     const USERNAME = 'gustavo.vic.dauer';
-    const PASSWORD = 'Guga@dauer12';
+    const PASSWORD = '*********';
     const NAME_FROM = 'Webjump Store';
 
     private $mail;
