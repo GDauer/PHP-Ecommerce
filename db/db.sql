@@ -126,7 +126,7 @@ CREATE INDEX `fk_carts_addresses_idx` ON `tb_carts` (`idaddress` ASC);
 DROP TABLE IF EXISTS `tb_products` ;
 
 CREATE TABLE IF NOT EXISTS `tb_products` (
-  `idproduct` INT(11) NOT NULL,
+  `idproduct` INT(11) NOT NULL AUTO_INCREMENT,
   `desproduct` VARCHAR(64) NOT NULL,
   `vlprice` DECIMAL(10,2) NOT NULL,
   `vlwidth` DECIMAL(10,2) NOT NULL,
