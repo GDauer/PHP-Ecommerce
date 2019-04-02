@@ -12,7 +12,7 @@ class User extends Model {
     const SECRET_IV = 'Webjump';
     const ERROR = "UserError";
     const ERROR_REGISTER = "UserErrorRegister";
-    const SUCCESS = "UserSucesss";
+    const SUCCESS = "UserSuccess";
 
     public static function getFromSession()
     {
