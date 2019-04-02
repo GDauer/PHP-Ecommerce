@@ -197,6 +197,7 @@ class User extends Model {
                 ":iduser"=>$data["iduser"],
                 ":desip"=>$_SERVER["REMOTE_ADDR"]
             ));
+
             if (count($resultsRecovery) === 0)
             {
 
@@ -213,7 +214,15 @@ class User extends Model {
 
                 $code = base64_encode(openssl_encrypt($dataRecovery["idrecovery"], 'AES-128-CBC', $key, 0, $key_IV));
 
-                $link = "http://seudominio2.com/admin/forgot/reset?code=$code";
+                if($inadmin === true) {
+
+                    $link = "http://seudominio2.com/admin/forgot/reset?code=$code";
+
+                } else {
+
+                    $link = "http://seudominio2.com/forgot/reset?code=$code";
+
+                }
 
                 $mailer = new Mailer($data['desemail'], $data['desperson'] ,"Redefinir senha da Webjump Store" ,"forgot", array(
                     "name"=>$data['desperson'],
@@ -265,7 +274,7 @@ class User extends Model {
         }
     }
 
-    public static function setFogotUsed($idrecovery)
+    public static function setForgotUsed($idrecovery)
     {
         $sql = new Sql();
         $sql->query("UPDATE tb_userspasswordsrecoveries SET dtrecovery = NOW() WHERE idrecovery = :idrecovery", array(
