@@ -299,9 +299,12 @@ $app->post("/login", function () {
 $app->get("/logout", function (){
 
     User::logout();
+
     Cart::removeFromSession();
+
     session_regenerate_id();
 
+    header("Location: /");
     exit;
 
 });
@@ -529,7 +532,7 @@ $app->get('/boleto/:idorder', function ($idorder) {
 // DADOS DO SEU CLIENTE
     $dadosboleto["sacado"] = $order->getdesperson();
     $dadosboleto["endereco1"] = $order->getdesaddress() . " " . $order->getdesdistrict();
-    $dadosboleto["endereco2"] = $order->getdescity() . " - " . $order->getdesstate() . " - " . $order->getdescountry() ." - CEP: " . $order->getdeszipcode();
+    $dadosboleto["endereco2"] = utf8_encode($order->getdescity()) . " - " . $order->getdesstate() . " - " . $order->getdescountry() ." - CEP: " . $order->getdeszipcode();
 
 // INFORMACOES PARA O CLIENTE
     $dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja Webjump! E-commerce";
