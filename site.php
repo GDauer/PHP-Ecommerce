@@ -234,6 +234,13 @@ $app->post('/checkout', function () {
 
     }
 
+    if(!isset($_POST['desnumber']) || $_POST['desnumber'] === '') {
+
+        Address::setMsgError("Informe o número");
+        header("Location: /checkout");
+        exit;
+    }
+
 
     $user = User::getFromSession();
 
@@ -262,8 +269,20 @@ $app->post('/checkout', function () {
 
     $order->save();
 
-    header("Location: /order/". $order->getidorder() . "/pagseguro");
+    switch ((int)$_POST['payment-method']) {
+        case 1:
+            header("Location: /order/". $order->getidorder() . "/pagseguro");
+            break;
+        case 2:
+            header("Location: /order/". $order->getidorder() . "/paypal");
+            break;
+        case 3:
+            header("Location: /boleto/". $order->getidorder());
+            break;
+    }
     exit;
+
+
 
 });
 
@@ -293,6 +312,42 @@ $app->get('/order/:idorder/pagseguro', function ($idorder) {
             'number'=>substr($order->getnrphone(), 2, strlen($order->getnrphone()))
         ]
         ]);
+
+});
+
+$app->get('/order/:idorder/paypal', function ($idorder) {
+
+    User::verifyLogin(false);
+
+    $order = new Order();
+
+    $order->get((int)$idorder);
+
+    $cart = $order->getCart();
+
+    $page = new Page([
+        'header'=>false,
+        'footer'=>false
+    ]);
+
+    //var_dump($order->getValues()); exit;
+
+    $page->setTpl('payment-paypal', [
+        'order'=>$order->getValues(),
+        'cart'=>$cart->getValues(),
+        'products'=>$cart->getProducts()
+    ]);
+
+});
+
+$app->post('/cancel', function () {
+
+    Cart::removeFromSession();
+
+    session_regenerate_id();
+
+    header("Location: /");
+    exit;
 
 });
 
