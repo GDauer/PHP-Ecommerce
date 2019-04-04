@@ -4,6 +4,7 @@ use \Hcode\Page;
 use \Hcode\Model\Product;
 use \Hcode\Model\Cart;
 use \Hcode\Model\User;
+use \Hcode\Model\Category;
 
 
 $app->get('/', function() { //rota 1
@@ -185,5 +186,31 @@ $app->post('/forgot/reset', function () {
 
     $page->setTpl('forgot-reset-success');
 
+});
+
+$app->get('/products', function () {
+
+    $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+
+    $products = new Product();
+
+    $pagination = $products->getPage($page);
+
+    $pages = [];
+
+    for ($i = 1; $i <= $pagination['pages']; $i++) {
+        array_push($pages, [
+            'link'=>'/products' . $products->getidproduct() . '?page=' . $i,
+            'page'=>$i
+        ]);
+
+    }
+
+    $page = new Page();
+
+    $page->setTpl("products", [
+        "products"=>$pagination["data"],
+        "pages"=>$pages
+    ]);
 });
 
