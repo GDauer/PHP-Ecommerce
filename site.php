@@ -530,7 +530,7 @@ $app->get('/boleto/:idorder', function ($idorder) {
     $dadosboleto["valor_boleto"] = $valor_boleto; 	// Valor do Boleto - REGRA: Com vírgula e sempre com duas casas depois da virgula
 
 // DADOS DO SEU CLIENTE
-    $dadosboleto["sacado"] = $order->getdesperson();
+    $dadosboleto["sacado"] = utf8_encode($order->getdesperson());
     $dadosboleto["endereco1"] = $order->getdesaddress() . " " . $order->getdesdistrict();
     $dadosboleto["endereco2"] = utf8_encode($order->getdescity()) . " - " . $order->getdesstate() . " - " . $order->getdescountry() ." - CEP: " . $order->getdeszipcode();
 

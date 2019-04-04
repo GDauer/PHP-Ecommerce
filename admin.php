@@ -2,7 +2,7 @@
 
 use \Hcode\PageAdmin;
 use \Hcode\Model\User;
-use \Hcode\Mailer;
+use \Hcode\Model\Cart;
 
 
 $app->get('/admin', function() {
@@ -41,6 +41,8 @@ $app->post('/admin/login', function () {
 $app->get('/admin/logout', function () {
 
     User::logout();
+
+    Cart::removeFromSession();
 
     header("Location: /admin/login");
     exit;
