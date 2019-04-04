@@ -87,7 +87,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="logo">
-                    <h1><a href="#"><img src="/logo.png"></a></h1>
+                    <h1><a href="/"><img src="/logo.png"></a></h1>
                 </div>
             </div>
 
@@ -113,8 +113,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Produtos</a></li>
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/">Produtos</a></li>
                     <li><a href="/cart">Carrinho</a></li>
                 </ul>
             </div>
