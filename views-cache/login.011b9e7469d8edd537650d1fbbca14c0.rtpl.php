@@ -82,7 +82,7 @@
                         <input type="password" id="senha" name="password" class="input-text">
                     </p>
                     <div class="clear"></div>
-                    <div class="g-recaptcha" data-sitekey="6Ld45pkUAAAAALB4BP016uYa4EmC7e1MQ36qv2Qf"></div>
+                    <div class="g-recaptcha" data-sitekey="6Ld45pkUAAAAALB4BP016uYa4EmC7e1MQ36qv2Qf"></div><br />
                     <p class="form-row">
                         <input type="submit" value="Criar Conta" name="login" class="button">
                     </p>
