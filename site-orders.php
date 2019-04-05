@@ -7,6 +7,7 @@ use \Hcode\Model\Address;
 use \Hcode\Model\User;
 use \Hcode\Model\Order;
 use \Hcode\Model\OrderStatus;
+use \Hcode\Model\Wishlist;
 
 $app->get("/products/:desurl",function($desurl) {
 
@@ -14,12 +15,22 @@ $app->get("/products/:desurl",function($desurl) {
 
     $product->getFromURL($desurl);
 
+    $user = User::getFromSession();
+
+//    $list = new Wishlist();
+
+    $list = Wishlist::getFromUserProducts($user->getiduser(), $product->getidproduct());
+
+    $inlist = ($list['idlist'] !== '' && $list['idlist'] !== null) ? $inlist = true : $inlist = false;
+
     $page = new Page();
 
     $page->setTpl("product-detail", [
         "product"=>$product->getValues(),
-        "categories"=>$product->getCategories()
-
+        "categories"=>$product->getCategories(),
+        "user"=>$user->getValues(),
+        "list"=>$list['idlist'],
+        "inlist"=>$inlist
     ]);
 
 });

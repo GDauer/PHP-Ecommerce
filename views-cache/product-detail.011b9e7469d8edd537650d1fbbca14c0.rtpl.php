@@ -41,7 +41,29 @@
                                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="qtd" min="1" step="1">
                                     </div>
                                     <button class="add_to_cart_button" type="submit">Comprar</button>
-                                </form>   
+                                    <?php if( $inlist === false ){ ?>
+
+                                        <?php if( $user ){ ?>
+
+                                    <button class="add_to_cart_button" type="submit" formaction="/wishlist/<?php echo htmlspecialchars( $product["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $user["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/save"><i class="fa fa-heart-o"></i></button>
+                                        <?php }else{ ?>
+
+                                    <button class="add_to_cart_button" type="submit" formaction="/login"><i class="fa fa-heart-o"></i></button>
+                                        <?php } ?>
+
+                                    <?php }else{ ?>
+
+                                        <?php if( $user ){ ?>
+
+                                    <button class="add_to_cart_button" type="submit" formaction="/wishlist/<?php echo htmlspecialchars( $product["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $list, ENT_COMPAT, 'UTF-8', FALSE ); ?>/remove"><i class="fa fa-heart"></i></button>
+                                        <?php }else{ ?>
+
+                                    <button class="add_to_cart_button" type="submit" formaction="/login"><i class="fa fa-heart"></i></button>
+                                        <?php } ?>
+
+                                    <?php } ?>
+
+                                </form>
                                 
                                 <div class="product-inner-category">
                                     <p>Categorias:<?php $counter1=-1;  if( isset($categories) && ( is_array($categories) || $categories instanceof Traversable ) && sizeof($categories) ) foreach( $categories as $key1 => $value1 ){ $counter1++; ?> <a href="/categories/<?php echo htmlspecialchars( $value1["idcategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>.<?php } ?>

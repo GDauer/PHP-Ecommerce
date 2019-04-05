@@ -4,7 +4,7 @@ use \Hcode\Page;
 use \Hcode\Model\Product;
 use \Hcode\Model\Cart;
 use \Hcode\Model\User;
-use \Hcode\Model\Category;
+use \Hcode\Model\Wishlist;
 
 
 $app->get('/', function() { //rota 1
@@ -206,11 +206,84 @@ $app->get('/products', function () {
 
     }
 
+
     $page = new Page();
 
     $page->setTpl("products", [
         "products"=>$pagination["data"],
         "pages"=>$pages
     ]);
+});
+
+$app->get('/wishlist', function (){
+
+    User::verifyLogin(false);
+
+    $user = User::getFromSession();
+
+    $product = new Product();
+
+    $list = Wishlist::getFromUser($user->getiduser());
+
+    $products = array();
+
+    $count = count($list);
+
+    for($i = 0; $i < $count; $i++)
+    {
+        $id = $list[$i]['idproducts'];
+
+        $product->get((int)$id);
+        $products[$i] =(array) $product->getValues();
+
+    }
+    
+    $page = new Page();
+
+    $page->setTpl("wishlist", [
+        'products'=>(array)$products
+    ]);
+
+});
+
+$app->get('/wishlist/:idproducts/:iduser/save', function ($idproducts, $iduser){
+
+    User::verifyLogin(false);
+
+    $list = new Wishlist();
+
+    $product= new Product();
+
+    $product->get((int)$idproducts);
+
+    $list->setData([
+       'idproducts'=>$idproducts,
+       'iduser'=>$iduser
+    ]);
+
+    $list->save();
+
+    header("Location: /products/" . $product->getdesurl());
+    exit;
+
+});
+
+$app->get('/wishlist/:idproducts/:idlist/remove', function ($idproducts, $idlist){
+
+    User::verifyLogin(false);
+
+    $list = new Wishlist();
+
+    $product= new Product();
+
+    $product->get((int)$idproducts);
+
+    $list->get((int)$idlist);
+
+    $list->remove();
+
+    header("Location: /products/" . $product->getdesurl());
+    exit;
+
 });
 
