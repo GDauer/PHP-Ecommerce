@@ -73,7 +73,8 @@
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descrição</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Avaliações</a></li>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Avalie</a></li>
+                                        <li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab">Avaliações</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="home">
@@ -82,7 +83,15 @@
 
                                             <p>Mauris placerat vitae lorem gravida viverra. Mauris in fringilla ex. Nulla facilisi. Etiam scelerisque tincidunt quam facilisis lobortis. In malesuada pulvinar neque a consectetur. Nunc aliquam gravida purus, non malesuada sem accumsan in. Morbi vel sodales libero.</p>
                                         </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="review">
+                                            <h2>Avaliações dos Usuários</h2>
+                                            <p><label>nome: </label></p>
+                                            <p><label>email: </label></p>
+                                            <p><label>mensagem:</label></p>
+                                            <p>Lorem ipsum</p>
+                                        </div>
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
+                                            <form action="#" method="post">
                                             <h2>Reviews</h2>
                                             <div class="submit-review">
                                                 <p><label for="name">Name</label> <input name="name" type="text"></p>
@@ -101,6 +110,7 @@
                                                 <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
                                                 <p><input type="submit" value="Submit"></p>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

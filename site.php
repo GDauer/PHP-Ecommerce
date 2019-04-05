@@ -112,6 +112,14 @@ $app->post("/register", function (){
 
     $user = new User();
 
+    if($user->captcha() !== true){
+
+        User::setErrorRegister("Confirme que você não é um robô!");
+        header("Location: /login");
+        exit;
+    }
+
+
     $user->setData([
         'inadmin'=>0,
         'deslogin'=>$_POST['email'],
