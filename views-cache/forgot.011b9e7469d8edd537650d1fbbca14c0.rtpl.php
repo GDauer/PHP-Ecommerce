@@ -1,4 +1,4 @@
-<div class="product-big-title-area">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="product-big-title-area">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -15,13 +15,12 @@
     <div class="container">
         <div class="row">                
             <div class="col-md-12">
-                <form id="login-form-wrap" class="login" method="post" action="/forgot/reset">
-                    <input type="hidden" name="code" value="{$code}">
-                    <h2>Olá {$name}, digite uma nova senha:</h2>
+                <form id="login-form-wrap" class="login" method="post" action="/forgot">
+                    <h2>Recuperar senha</h2>
                     <p class="form-row form-row-first">
-                        <label for="password">Nova senha <span class="required">*</span>
+                        <label for="email">E-mail <span class="required">*</span>
                         </label>
-                        <input type="password" id="password" name="password" class="input-text" style="width:350px">
+                        <input type="email" id="email" name="email" class="input-text" style="width:350px">
                     </p>
                     <div class="clear"></div>
                     <p class="form-row">
