@@ -237,7 +237,7 @@ $app->get('/wishlist', function (){
         $products[$i] =(array) $product->getValues();
 
     }
-    
+
     $page = new Page();
 
     $page->setTpl("wishlist", [
