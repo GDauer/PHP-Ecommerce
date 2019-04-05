@@ -1,6 +1,6 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
 <!--
-    Hcode Store by hcode.com.br
+    Webjump Store made by Gustavo Vicente Dauer for Hcode PHP course
 -->
 <html lang="pt-br">
 <head>
