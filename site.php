@@ -229,27 +229,30 @@ $app->get('/wishlist', function (){
 
     $user = User::getFromSession();
 
-    $product = new Product();
+    //$product = new Product();
 
-    $list = Wishlist::getFromUser($user->getiduser());
+    //$list = Wishlist::getFromUser($user->getiduser());
 
-    $products = array();
+    $products = Product::getWishlist($user->getiduser());
 
-    $count = count($list);
-
-    for($i = 0; $i < $count; $i++)
-    {
-        $id = $list[$i]['idproducts'];
-
-        $product->get((int)$id);
-        $products[$i] =(array) $product->getValues();
-
-    }
+//
+//    $products = array();
+//
+//    $count = count($list);
+//
+//    for($i = 0; $i < $count; $i++)
+//    {
+//        $id = $list[$i]['idproducts'];
+//
+//        $product->get((int)$id);
+//        $products[$i] =(array) $product->getValues();
+//
+//    }
 
     $page = new Page();
 
     $page->setTpl("wishlist", [
-        'products'=>(array)$products
+        'products'=>$products
     ]);
 
 });

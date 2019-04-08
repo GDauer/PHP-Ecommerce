@@ -234,4 +234,24 @@ class Product extends Model {
 
     }
 
+    public static function getWishlist($iduser)
+    {
+
+        $sql = new Sql();
+
+        $results = $sql->select("
+        SELECT *
+        FROM tb_products a
+        INNER JOIN tb_wishlist b ON a.idproduct = b.idproducts
+        WHERE b.iduser = :iduser", [
+            ':iduser'=>$iduser
+        ]);
+
+        if(count($results) > 0) {
+
+            return $results;
+
+        } else {echo "Query zuada";}
+    }
+
 }

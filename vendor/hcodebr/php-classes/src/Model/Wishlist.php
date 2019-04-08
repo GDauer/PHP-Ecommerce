@@ -69,21 +69,21 @@ class Wishlist extends Model {
 
     }
 
-    public static function getFromUser($iduser)
-    {
-
-        $sql = new Sql();
-
-        $results = $sql->select("SELECT * FROM tb_wishlist WHERE iduser = :iduser", [
-            ':iduser'=>$iduser
-        ]);
-
-        if(count($results) > 0) {
-
-            return $results;
-
-        }
-
-    }
+//    public static function getFromUser($iduser)
+//    {
+//
+//        $sql = new Sql();
+//
+//        $results = $sql->select("SELECT * FROM tb_wishlist WHERE iduser = :iduser", [
+//            ':iduser'=>$iduser
+//        ]);
+//
+//        if(count($results) > 0) {
+//
+//            return $results;
+//
+//        }
+//
+//    }
 
 }
