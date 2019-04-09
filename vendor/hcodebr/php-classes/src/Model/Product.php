@@ -4,6 +4,7 @@ namespace Hcode\Model;
 
 use \Hcode\DB\Sql;
 use \Hcode\Model;
+use Rain\Tpl\Exception;
 
 class Product extends Model {
 
@@ -252,6 +253,62 @@ class Product extends Model {
             return $results;
 
         } else {echo "Query zuada";}
+    }
+
+    public static function setAvail($desurl)
+    {
+
+        $sql = new Sql();
+
+        try {
+            $sql->query("INSERT INTO tb_review (nome, email, review, desurl) VALUES (:nome, :email, :review, :desurl)", [
+                ':nome' => utf8_encode($_POST['name']),
+                ':email' => utf8_encode($_POST['email']),
+                ':review' => utf8_encode($_POST['review']),
+                ':desurl' => utf8_encode($desurl)
+            ]);
+
+            if(!$sql) {
+                throw new \Exception("Problemas ao salvar o review! Tente novamente mais tarde");
+            }
+
+        } catch (\Exception $e) {
+
+            User::setError($e->getMessage());
+
+        }
+
+    }
+
+    public static function getAvail($desurl)
+    {
+
+        $sql = new Sql();
+
+        try {
+
+            $results = $sql->select("SELECT * FROM tb_review WHERE desurl = :desurl", [
+               ':desurl'=>$desurl
+            ]);
+
+            if(count($results) > 0) {
+
+                return $results;
+
+            } else if (!$results){
+
+                throw new \Exception("Erro ao mostrar avaliações ou avaliações inexistentes");
+
+            }
+
+            } catch (\Exception $e) {
+
+            User::setError($e->getMessage());
+
+            return '';
+
+        }
+
     }
 
 }

@@ -298,3 +298,64 @@ $app->get('/wishlist/:idproducts/:idlist/remove', function ($idproducts, $idlist
 
 });
 
+$app->get("/products/:desurl",function($desurl) {
+
+    $product = new Product();
+
+    $product->getFromURL($desurl);
+
+    $user = User::getFromSession();
+
+    //var_dump(Product::getAvail($desurl)); exit;
+
+//    $list = new Wishlist();
+
+    $list = Wishlist::getFromUserProducts($user->getiduser(), $product->getidproduct());
+
+    $inlist = ($list['idlist'] !== '' && $list['idlist'] !== null) ? $inlist = true : $inlist = false;
+
+    $page = new Page();
+
+    $page->setTpl("product-detail", [
+        "product"=>$product->getValues(),
+        "categories"=>$product->getCategories(),
+        "user"=>$user->getValues(),
+        "list"=>$list['idlist'],
+        "inlist"=>$inlist,
+        "aval"=> Product::getAvail($desurl),
+        "error"=>User::getError()
+    ]);
+
+});
+
+$app->post('/avail/:desurl', function ($desurl) {
+
+    //User::clearError();
+
+  if(!isset($_POST['name']) || $_POST['name'] === '' || $_POST['name'] === null) {
+
+      $_POST['name'] = 'Anônimous';
+
+  }
+
+    if(!isset($_POST['email']) || $_POST['email'] === '' || $_POST['email'] === null) {
+
+        $_POST['email'] = 'Anônimous';
+
+    }
+
+    if(!isset($_POST['review']) || $_POST['review'] === '' || $_POST['review'] === null) {
+
+        header("Location: /products/$desurl");
+        User::setError("O campo do review não pode ficar em branco!");
+        exit;
+
+    }
+
+    Product::setAvail($desurl);
+
+    header("Location: /products/$desurl");
+    exit;
+
+});
+

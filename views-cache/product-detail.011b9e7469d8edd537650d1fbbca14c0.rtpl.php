@@ -16,12 +16,22 @@
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
+                        <?php if( $error !== '' ){ ?>
+
+                        <div class="alert alert-danger">
+                            <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+
+                        <?php } ?>
+
+                        </div>
                         <a href="/">Home</a>
                         <a href=""><?php echo htmlspecialchars( $product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
+
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-sm-6">
+
                             <div class="product-images">
                                 <div class="product-main-img">
                                     <img src="<?php echo htmlspecialchars( $product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
@@ -83,15 +93,28 @@
 
                                             <p>Mauris placerat vitae lorem gravida viverra. Mauris in fringilla ex. Nulla facilisi. Etiam scelerisque tincidunt quam facilisis lobortis. In malesuada pulvinar neque a consectetur. Nunc aliquam gravida purus, non malesuada sem accumsan in. Morbi vel sodales libero.</p>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="review">
+                                        <div style="overflow: scroll; height: 250px" role="tabpanel" class="tab-pane fade" id="review">
                                             <h2>Avaliações dos Usuários</h2>
-                                            <p><label>nome: </label></p>
-                                            <p><label>email: </label></p>
+                                        <?php if( $aval !== null && $aval !== '' ){ ?>
+
+                                            <?php $counter1=-1;  if( isset($aval) && ( is_array($aval) || $aval instanceof Traversable ) && sizeof($aval) ) foreach( $aval as $key1 => $value1 ){ $counter1++; ?>
+
+                                            <p><label>nome:</label> <?php echo utf8_decode($value1["nome"]); ?></p>
+                                            <p><label>email:</label> <?php echo utf8_decode($value1["email"]); ?></p>
                                             <p><label>mensagem:</label></p>
-                                            <p>Lorem ipsum</p>
+                                            <p><?php echo utf8_decode($value1["review"]); ?></p>
+                                            <hr>
+                                            <?php } ?>
+
+                                            <?php }else{ ?>
+
+                                            <p>Nenhuma avaliação disponivél!</p>
+                                        <?php } ?>
+
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <form action="#" method="post">
+                                            <form action="/avail/<?php echo htmlspecialchars( $product["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
                                             <h2>Reviews</h2>
                                             <div class="submit-review">
                                                 <p><label for="name">Name</label> <input name="name" type="text"></p>
@@ -107,7 +130,7 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                 </div>
-                                                <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                <p><label for="review">Your review</label> <textarea name="review" id="review" cols="30" rows="10"></textarea></p>
                                                 <p><input type="submit" value="Submit"></p>
                                             </div>
                                             </form>
