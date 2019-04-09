@@ -76,7 +76,8 @@ Possui apenas um método, é uma classe final que serve apenas para gerenciar os
 * <strong>Vendor -> Hcodebr -> php-classes -> src -> Model -> Product.php </strong>
 
 Classe responsável pelo CRUD de produtos, traser a wishlist atrelado ao usuário, categoria e o carrinho. 
-Possui métodos para paginação
+Possui métodos para paginação,
+<strong>OBSERVAÇÃO:</strong> Essa classe necessita de uma tabela contendo as relações entre <strong>REVIEW n-1 PRODUTOS.</strong>
 
 * <strong>Vendor -> Hcodebr -> php-classes -> src -> Model -> User.php </strong>
 
@@ -86,7 +87,7 @@ Possui método para paginação, forgot password via classe Mailer.php, get Orde
 * <strong>Vendor -> Hcodebr -> php-classes -> src -> Model -> Wishlist.php </strong>
 
 Classe responsável pelo CRUD da lista de desejos 
-<strong>OBSERVAÇÃO: Essa classe necessita de uma tabela contendo as relações entre USUÁRIO 1-n PRODUTOS. 
+<strong>OBSERVAÇÃO:</strong> Essa classe necessita de uma tabela contendo as relações entre <strong>USUÁRIO 1-n PRODUTOS.</strong> 
 
 * <strong>Vendor -> Hcodebr -> php-classes -> src -> Model -> Cart.php </strong>
 
@@ -100,8 +101,6 @@ E
 ```ext
 "simplexml_load_file"
 ```
-------
-
 ------
 
 # Telas: #
