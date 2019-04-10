@@ -366,6 +366,12 @@ $app->get('/boleto/:idorder', function ($idorder) {
     require_once ($path . "funcoes_itau.php");
     require_once ($path . "layout_itau.php");
 
+    User::logout();
+
+    Cart::removeFromSession();
+
+    session_regenerate_id();
+
 });
 
 ?>
