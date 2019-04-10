@@ -255,17 +255,17 @@ class Product extends Model {
         } else {echo "Query zuada";}
     }
 
-    public static function setAvail($desurl)
+    public static function setAvail($idproduct)
     {
 
         $sql = new Sql();
 
         try {
-            $sql->query("INSERT INTO tb_review (nome, email, review, desurl) VALUES (:nome, :email, :review, :desurl)", [
+            $sql->query("INSERT INTO tb_review (nome, email, review, idproduct) VALUES (:nome, :email, :review, :idproduct)", [
                 ':nome' => utf8_encode($_POST['name']),
                 ':email' => utf8_encode($_POST['email']),
                 ':review' => utf8_encode($_POST['review']),
-                ':desurl' => utf8_encode($desurl)
+                ':idproduct' => utf8_encode($idproduct)
             ]);
 
             if(!$sql) {
@@ -280,26 +280,26 @@ class Product extends Model {
 
     }
 
-    public static function getAvail($desurl)
+    public static function getAvail($idproduct)
     {
 
         $sql = new Sql();
 
         try {
 
-            $results = $sql->select("SELECT * FROM tb_review WHERE desurl = :desurl", [
-               ':desurl'=>$desurl
-            ]);
+                $results = $sql->select("SELECT * FROM tb_review a INNER JOIN tb_products b USING (idproduct) WHERE a.idproduct = :idproduct AND a.idproduct = b.idproduct", [
+                    ':idproduct' => $idproduct
+                ]);
 
-            if(count($results) > 0) {
+                if (count($results) > 0) {
 
-                return $results;
+                    return $results;
 
-            } else if (!$results){
+                } else if (!$results) {
 
-                throw new \Exception("Erro ao mostrar avaliações ou avaliações inexistentes");
+                    throw new \Exception("Erro ao mostrar avaliações ou avaliações inexistentes");
 
-            }
+                }
 
             } catch (\Exception $e) {
 
@@ -308,6 +308,17 @@ class Product extends Model {
             return '';
 
         }
+
+    }
+
+    public static function removeAvail($idreview)
+    {
+
+        $sql = new Sql();
+
+        $sql->query("DELETE FROM tb_review WHERE idreview = :idreview", [
+            ':idreview'=>$idreview
+        ]);
 
     }
 

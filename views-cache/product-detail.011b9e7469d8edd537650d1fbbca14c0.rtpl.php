@@ -24,9 +24,6 @@
                         <?php } ?>
 
                         </div>
-                        <a href="/">Home</a>
-                        <a href=""><?php echo htmlspecialchars( $product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
-
                     </div>
 
                     <div class="row">

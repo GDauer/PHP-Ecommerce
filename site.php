@@ -322,7 +322,7 @@ $app->get("/products/:desurl",function($desurl) {
         "user"=>$user->getValues(),
         "list"=>$list['idlist'],
         "inlist"=>$inlist,
-        "aval"=> Product::getAvail($desurl),
+        "aval"=> Product::getAvail($product->getidproduct()),
         "error"=>User::getError()
     ]);
 
@@ -330,7 +330,9 @@ $app->get("/products/:desurl",function($desurl) {
 
 $app->post('/avail/:desurl', function ($desurl) {
 
-    //User::clearError();
+    $product = new Product();
+
+    $product->getFromURL($desurl);
 
   if(!isset($_POST['name']) || $_POST['name'] === '' || $_POST['name'] === null) {
 
@@ -352,7 +354,7 @@ $app->post('/avail/:desurl', function ($desurl) {
 
     }
 
-    Product::setAvail($desurl);
+    Product::setAvail($product->getidproduct());
 
     header("Location: /products/$desurl");
     exit;

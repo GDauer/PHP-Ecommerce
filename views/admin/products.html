@@ -43,7 +43,7 @@
                     <th>Altura</th>
                     <th>Comprimento</th>
                     <th>Peso</th>
-                    <th style="width: 140px">&nbsp;</th>
+                    <th style="width: 202px">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -57,6 +57,7 @@
                     <td>{$value.vllength}</td>
                     <td>{$value.vlweight}</td>
                     <td>
+                      <a href="/admin/products/reviews/{$value.idproduct}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> reviews</a>
                       <a href="/admin/products/{$value.idproduct}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="/admin/products/{$value.idproduct}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>

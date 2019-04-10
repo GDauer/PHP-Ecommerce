@@ -120,4 +120,28 @@ $app->get("/admin/products/:idproducts/delete", function ($idproducts) {
 
 });
 
+$app->get('/admin/products/reviews/:idproduct', function ($idproduct){
+
+    User::verifyLogin();
+
+    $page = new PageAdmin();
+
+    $page->setTpl('reviews', [
+        'aval'=>Product::getAvail($idproduct)
+    ]);
+
+});
+
+$app->get('/admin/products/reviews/:idreview/remove', function ($idreview){
+
+    User::verifyLogin();
+
+    Product::removeAvail($idreview);
+
+    header("Location: /admin/products");
+    exit;
+
+
+});
+
 ?>
